@@ -1,0 +1,30 @@
+.SectionTopBarAside {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.containerNotifications{
+    width: 23px;
+    height: 23px;
+    padding: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: var(--color-general-backgroud);
+    box-shadow: 0 0 4px rgba(255,255, 255, .1);
+    cursor: pointer;
+}
+
+.btnUpgratedToPremium {
+    border-radius: 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+}
+
+.btnUpgratedToPremium svg {
+    fill: #efb810;
+}

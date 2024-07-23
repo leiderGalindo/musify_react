@@ -1,0 +1,53 @@
+.itemArtist {
+    padding: 5px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    gap: 10px;
+}
+
+.itemArtist:hover {
+    background-color: var(--color-backgroud-hover);
+}
+
+.itemArtist .containerImage {
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.itemArtist .containerImage img {
+    width: 30px;
+}
+
+.itemArtist .infoArtist {
+    
+}
+
+.itemArtist .infoArtist .nameArtist {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 17px;
+}
+
+.itemArtist .infoArtist .nameArtist svg {
+    fill: #4682b4;
+}
+
+.itemArtist .infoArtist .descriptionArtist {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+}
+
+.itemArtist .infoArtist .descriptionArtist svg.icon-tabler-point {
+    width: 14px !important;
+}

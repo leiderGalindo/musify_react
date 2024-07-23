@@ -1,0 +1,27 @@
+.contentFilter {
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contentFilter button {
+    width: 50px;
+    height: 50px;
+    padding: 0px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contentFilter .sortData {
+    width: 150px;
+    height: 40px;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    border: none;
+}

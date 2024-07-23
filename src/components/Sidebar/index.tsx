@@ -1,16 +1,16 @@
-import { Sections, SectionsMyLibrary } from "./Sections"
-import { Close, Menu } from "../icons"
-import { ItemMenu } from "./ItemMenu"
-import { User } from "./user"
+import { useState } from 'react'
+import { Sections, SectionsMyLibrary } from "../Sections"
+import { Close, Menu } from "../../icons"
+import { ItemMenu } from "../ItemMenu"
+import { User } from "../user"
+import './index.css'
 
-interface Props {
-    changeStatusMenu: (status: string) => void
-}
+export const Sidebar = () => {
+    const [ statusMenu, setStatusMenu ] = useState('')
 
-export const Sidebar = ({ changeStatusMenu }: Props) => {
     return (
-        <>
-            <div className="sidebar">
+        <section className='mainSidebar'>
+            <div className={`sidebar ${statusMenu}`}>
                 <User />
 
                 <div className="m-t-30 title">Menu</div>
@@ -50,13 +50,13 @@ export const Sidebar = ({ changeStatusMenu }: Props) => {
                     </div>
                 </div>
 
-                <button className="MenuClose" onClick={() => changeStatusMenu('')}>
+                <button className="MenuClose" onClick={() => setStatusMenu('')}>
                     <Close />
                 </button>
             </div>
-            <button className="MenuOpen" onClick={() => changeStatusMenu('menuActive')}>
+            <button className={`MenuOpen ${statusMenu}`} onClick={() => setStatusMenu('menuActive')}>
                 <Menu />
             </button>
-        </>
+        </section>
     )
 }
