@@ -1,13 +1,14 @@
 .containerListSongs{
     display: grid;
+    gap: 10px;
+    padding: 0 20px;
 }
 
-.containerListSongs .grid {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+.containerListSongs.grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
 }
 
-.containerListSongs .list {
+.containerListSongs.list {
     grid-template-columns: 1fr;
 }
-
-.containerListSongs {}

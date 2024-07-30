@@ -1,14 +1,20 @@
-import { useState } from "react"
 import { IconDownload, IconGrid, IconList } from "../../../icons"
 import './index.css'
 
-export const FilterContect = () => {
-    const [typeList, setTypeList] = useState('grid')
+interface Props {
+    typeList: string
+    onChangeStyleList: (typeList: string) => void
+}
+
+export const FilterContect = ({ typeList, onChangeStyleList }: Props) => {
     
     const handelClickTypeList = () =>{
+        console.log(typeList);
         const NewType = ((typeList === 'grid') ? 'list' : 'grid')
-        setTypeList(NewType)
+        console.log(NewType);
+        onChangeStyleList(NewType)
     }
+
     return (
         <section className="contentFilter">
             <button>

@@ -1,30 +1,36 @@
 import { Heart, IconClock, IconHeadphones, Play } from "../../../icons"
-
+import { Song as typeSong } from "../../types.d"
+import './index.css'
 interface Props {
-    song: object
+    song: typeSong
 }
+
 export const Song = ({ song }: Props) => {
     return (
-        <article className="">
-            <div>
-                imagen
+        <article className='itemSong'>
+            <div className="containerImg">
+                <img src={song.preview} alt={song.name} title={song.name} />
             </div>
             <div className="basicInformation">
-                <p className="nameSong">Nombre Cancion</p>
-                <p className="artisName">Artista</p>
+                <p className="nameSong">{song.name}</p>
+                <p className="artisName">{song.artist}</p>
             </div>
             <div className="moreInformation">
-                <div>
-                    <IconClock/> 04:19
+                <div className="hiddenXs">
+                    <IconClock/>{song.duration}
+                </div>
+                <div className="hiddenXs">
+                    <IconHeadphones/>{song.reproductions}
+                </div>
+                <div className="hiddenXs">
+                    <span className="heartOfSong">
+                        <Heart/>{song.likes}
+                    </span>
                 </div>
                 <div>
-                    <IconHeadphones/> 45K
-                </div>
-                <div>
-                    <Heart/> 6K
-                </div>
-                <div>
-                    <Play/>
+                    <span className="playSong">
+                        <Play/>
+                    </span>
                 </div>
             </div>
         </article>

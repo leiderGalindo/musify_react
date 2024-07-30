@@ -79,32 +79,36 @@
 }
 
 @media (width < 900px){
-    .MainContainerApp .sidebar {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 50%;
-        z-index: 2;
-        opacity: 0;
-        transform: translateX(-20px);
-        transition: opacity 0.5s linear, transform 0.5s ease;
-    }
+  .MainContainerApp .mainSidebar {
+    width: 0;
+  }
+  
+  .MainContainerApp .sidebar {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 50%;
+      z-index: 2;
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: opacity 0.5s linear, transform 0.5s ease;
+  }
 
-    .MainContainerApp .sidebar.menuActive {
-        opacity: 1;
-        transform: translateX(0); 
-    }
+  .MainContainerApp .sidebar.menuActive {
+      opacity: 1;
+      transform: translateX(0); 
+  }
 
-    .MainContainerApp .MenuOpen {
-        opacity: 1;
-        display: block;
-    }
+  .MainContainerApp .MenuOpen {
+      opacity: 1;
+      display: block;
+  }
 
-    .MainContainerApp .MenuOpen.menuActive {
-        opacity: 0;
-    }
+  .MainContainerApp .MenuOpen.menuActive {
+      opacity: 0;
+  }
 
-    .MainContainerApp .sidebar.menuActive .MenuClose {
-        display: block;
-    }
+  .MainContainerApp .sidebar.menuActive .MenuClose {
+      display: block;
+  }
 }
