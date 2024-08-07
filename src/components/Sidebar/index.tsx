@@ -1,16 +1,18 @@
 import { useState } from 'react'
 import { Sections, SectionsMyLibrary } from "../Sections"
-import { Close, Menu } from "../../icons"
+import { Close } from "../../icons"
 import { ItemMenu } from "../ItemMenu"
 import { User } from "../user"
 import './index.css'
+import { useSongsStore } from '../../store/songs'
 
 export const Sidebar = () => {
-    const [ statusMenu, setStatusMenu ] = useState('')
+    const statusMenu = useSongsStore(state => state.statusMenu)
+    const ChangeMenuStatus = useSongsStore(state => state.ChangeMenuStatus)
 
     return (
-        <section className='mainSidebar'>
-            <div className={`sidebar ${statusMenu}`}>
+        <section className={`mainSidebar ${statusMenu}`}>
+            <div className='sidebar'>
                 <User />
 
                 <div className="m-t-30 title">Menu</div>
@@ -50,13 +52,10 @@ export const Sidebar = () => {
                     </div>
                 </div>
 
-                <button className="MenuClose" onClick={() => setStatusMenu('')}>
+                <button className="MenuClose" onClick={() => ChangeMenuStatus()}>
                     <Close />
                 </button>
             </div>
-            <button className={`MenuOpen ${statusMenu}`} onClick={() => setStatusMenu('menuActive')}>
-                <Menu />
-            </button>
         </section>
     )
 }

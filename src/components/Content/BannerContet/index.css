@@ -3,9 +3,31 @@
 }
 
 .imgsBanner {
-    width: 100%;
+    width: 90%;
+    padding: 0 5px;
     border-radius: 25px;
 }
+
+.flicking-arrow-prev::before,
+.flicking-arrow-prev::after,
+.flicking-arrow-next::before,
+.flicking-arrow-next::after {
+    content: "";
+    left: 35%;
+    width: 18px;
+    height: 6px;
+    position: absolute;
+    background-color: #FFF;
+}
+
+.flicking-arrow-prev,
+.flicking-arrow-next
+{
+    background-color: rgba(0,0,0,.4);
+    box-shadow: 0 0 7px rgba(255,255,255,.4);
+    border-radius: 50%;
+}
+
 @media (width < 900px){
     .containerBanner {
         padding: 5px;

@@ -1,27 +1,18 @@
 import { IconDownload, IconGrid, IconList } from "../../../icons"
+import { useSongsStore } from "../../../store/songs"
 import './index.css'
 
-interface Props {
-    typeList: string
-    onChangeStyleList: (typeList: string) => void
-}
-
-export const FilterContect = ({ typeList, onChangeStyleList }: Props) => {
+export const FilterContect = () => {
+    const listingStyle = useSongsStore(state => state.listingStyle)
+    const ChangeListingStyle = useSongsStore(state => state.ChangeListingStyle)
     
-    const handelClickTypeList = () =>{
-        console.log(typeList);
-        const NewType = ((typeList === 'grid') ? 'list' : 'grid')
-        console.log(NewType);
-        onChangeStyleList(NewType)
-    }
-
     return (
         <section className="contentFilter">
             <button>
                 <IconDownload />
             </button>
-            <button onClick={() => handelClickTypeList()}>
-                {(typeList == 'grid') ? <IconGrid /> : <IconList />}
+            <button onClick={() => ChangeListingStyle()}>
+                {(listingStyle == 'grid') ? <IconGrid /> : <IconList />}
             </button>
         
             <div className="containerSortData">

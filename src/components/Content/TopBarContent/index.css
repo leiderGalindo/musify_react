@@ -36,3 +36,10 @@
     border: none !important;
     outline: none;
 }
+
+@media (width < 900px){
+    .containerTopBarContet {
+        gap: 20px;
+        padding: 10px;
+    }
+}

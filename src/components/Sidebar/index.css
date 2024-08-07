@@ -75,28 +75,34 @@
   z-index: 2;
   opacity: 0;
   display: none;
+  background-color: transparent;
   transition: opacity 0.5s linear;
 }
 
 @media (width < 900px){
   .MainContainerApp .mainSidebar {
-    width: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 3;
+    transform: translateX(-120%);
+    transition: opacity 0.5s linear, transform 0.5s ease;
+  }
+
+  .MainContainerApp .aside {
+    display: none;
   }
   
   .MainContainerApp .sidebar {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 50%;
-      z-index: 2;
-      opacity: 0;
-      transform: translateX(-20px);
-      transition: opacity 0.5s linear, transform 0.5s ease;
+    width: 50%;
+    box-shadow: 0 0 4px rgba(255, 255, 255, .4);
+    background-color: rgba(0,0,0, .96);
   }
 
-  .MainContainerApp .sidebar.menuActive {
-      opacity: 1;
-      transform: translateX(0); 
+  .MainContainerApp .mainSidebar.menuActive {
+    transform: translateX(-5px); 
+    background: rgba(0,0,0, .6);
   }
 
   .MainContainerApp .MenuOpen {
@@ -104,11 +110,7 @@
       display: block;
   }
 
-  .MainContainerApp .MenuOpen.menuActive {
-      opacity: 0;
-  }
-
-  .MainContainerApp .sidebar.menuActive .MenuClose {
+  .MainContainerApp .mainSidebar.menuActive .MenuClose {
       display: block;
   }
 }
