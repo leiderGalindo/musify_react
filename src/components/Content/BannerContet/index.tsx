@@ -1,5 +1,5 @@
 import Flicking, { ViewportSlot } from "@egjs/react-flicking";
-import { AutoPlay } from "@egjs/flicking-plugins"
+// import { AutoPlay } from "@egjs/flicking-plugins"
 import { Arrow } from "@egjs/flicking-plugins";
 import "@egjs/flicking-plugins/dist/arrow.css";
 import "@egjs/react-flicking/dist/flicking.css";

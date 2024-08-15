@@ -32,7 +32,7 @@ export const TopBarContect = () => {
             </div>
             <div className="ContainerSearch">
                 <IconSearch />
-                <input type="text" className="searchInput" placeholder="sddsd" />
+                <input type="text" className="searchInput" placeholder="sddsd" onChange={handelClickSearch} />
             </div>
         </section>
     )
