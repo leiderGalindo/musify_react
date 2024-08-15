@@ -8,7 +8,7 @@ interface State {
     ChangeListingStyle: () => void
 }
 
-export const useSongsStore = create()(persist((set, get) => {
+export const useSongsStore = create<State>()(persist((set, get) => {
     return {
         statusMenu: '',
         listingStyle: 'grid',

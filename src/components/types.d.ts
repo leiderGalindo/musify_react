@@ -12,5 +12,5 @@ export interface Song {
     artist:         string,
     likes:          string,
     reproductions:  string,
-    duration:       string,
+    duration:       number,
 }

@@ -7,8 +7,10 @@ import './index.css'
 const songInProgress:Song = {
     preview: '',
     name: '',
-    artis: '',
-    duration: 11,
+    artist: '',
+    likes: '',
+    reproductions: '',
+    duration: 11
 }
 
 export const Player = () => {
@@ -41,7 +43,7 @@ export const Player = () => {
                 </div>
             </div>
             <div className='player'>
-                <SongControl audio={{"duration": 200}} />
+                <SongControl audio={songInProgress} />
                 <div className="controls">
                     <button className='secondaryButtons'>
                         <ArrowsShuffle />

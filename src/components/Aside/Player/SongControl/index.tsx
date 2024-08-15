@@ -10,9 +10,9 @@ export const SongControl = ({ audio }: Props) => {
     const duration =  audio.duration
     const FormattedDuration = '04:20'
 
-    const handleChangeCurrentTime = ({event}) => {
+    const handleChangeCurrentTime = (event: React.ChangeEvent<HTMLInputElement>) => {
         const newCurenTime = event.target.value
-        setCurrentTime(newCurenTime)
+        setCurrentTime(parseInt(newCurenTime))
     }
 
     return (
@@ -23,7 +23,7 @@ export const SongControl = ({ audio }: Props) => {
                 min="0"
                 max={duration}
                 value={currentTime}
-                onChange={() => handleChangeCurrentTime({event})}
+                onChange={() => handleChangeCurrentTime}
             />
             <div className="d-flex justify-content-between">
                 <span>00:00</span>
