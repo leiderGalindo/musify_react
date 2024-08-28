@@ -8,9 +8,9 @@ import "./index.css";
 
 
 const Banners = [
-    '5820250.jpg',
-    '5820250.jpg',
-    '5820250.jpg',
+    '5820202.jpg',
+    '5820202.jpg',
+    '5820202.jpg',
 ]
 export const BannerContet = () => {
     const plugins = [new Arrow()];
@@ -24,9 +24,8 @@ export const BannerContet = () => {
                 {
                     Banners.map((Banner, index) => {
                         return (
-                            <img 
-                                src={'/app_utils/imgs/banners/'+Banner}
-                                alt="banner image" 
+                            <div 
+                                style={{ backgroundImage: `url(/app_utils/imgs/banners/${Banner})` }}
                                 className="imgsBanner" 
                                 key={index}
                             />

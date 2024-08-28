@@ -12,6 +12,7 @@
   "dependencies": {
     "@egjs/flicking-plugins": "^4.7.1",
     "@egjs/react-flicking": "^4.11.4",
+    "dotenv": "^16.4.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "zustand": "^4.5.4"

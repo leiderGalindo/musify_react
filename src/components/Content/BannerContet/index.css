@@ -3,9 +3,13 @@
 }
 
 .imgsBanner {
+    height: 300px;
     width: 90%;
-    padding: 0 5px;
+    margin: 0 5px;
     border-radius: 25px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
 .flicking-arrow-prev::before,
@@ -32,4 +36,8 @@
     .containerBanner {
         padding: 5px;
     }   
+
+    .imgsBanner {
+        height: 200px;
+    }
 }
