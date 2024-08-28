@@ -7,13 +7,13 @@ import { getSongs } from "../services/songs"
 interface State {
   songList: Song[]
   currentSong: Song
+  statusMenu: string
   token: string
+  listingStyle: string
   tokenExpiresIn: number
   getToken: () => void
   fetchSongs: (SearchParameter: string) => void
   selectSong: (songId: number) => void
-  statusMenu: string
-  listingStyle: string
   ChangeMenuStatus: () => void
   ChangeListingStyle: () => void
 }
@@ -25,6 +25,7 @@ export const useSongsStore = create<State>()(persist((set, get) => {
     statusMenu: '',
     token: '',
     listingStyle: 'grid',
+    tokenExpiresIn: 0,
 
     getToken: async () => {
       const response = await getToken()
@@ -50,13 +51,15 @@ export const useSongsStore = create<State>()(persist((set, get) => {
       }
 
       const response = await getSongs({ token, SearchParameter })
-      const newTrackList = response ?? []
-
-      set({ songList: newTrackList })
+      const newTrackList = (response ?? [])
+      
+      if(newTrackList)
+        set({ songList: newTrackList })
     },
 
-    selectSong: () => {
-
+    selectSong: (songId) => {
+      console.log(songId);
+      
     },
 
     ChangeMenuStatus: () => {

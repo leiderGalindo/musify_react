@@ -27,7 +27,7 @@ export const getSongs = async ({ token, SearchParameter }:Props) => {
     .then(res => {
       const tracks = (res.tracks.items ?? [])
       const trackList:Song[] = []
-      tracks.map((track:any, index:number) => {
+      tracks.map((track:any) => {
         trackList.push({
           id: track.id,
           preview: (track.album.images[1].url ?? 'app_utils/imgs/songs/Cover.png'),
