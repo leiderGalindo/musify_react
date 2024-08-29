@@ -18,7 +18,7 @@ interface State {
   ChangeListingStyle: () => void
 }
 
-export const useSongsStore = create<State>()(persist((set, get) => {
+export const useSongsStore = create()(persist((set, get) => {
   return {
     songList: [],
     currentSong: {},
@@ -38,7 +38,7 @@ export const useSongsStore = create<State>()(persist((set, get) => {
       }
     },
 
-    fetchSongs: async (SearchParameter) => {
+    fetchSongs: async (SearchParameter: string) => {
       const { token } = get()
       const { tokenExpiresIn } = get()
       const { getToken } = get()
@@ -57,7 +57,7 @@ export const useSongsStore = create<State>()(persist((set, get) => {
         set({ songList: newTrackList })
     },
 
-    selectSong: (songId) => {
+    selectSong: (songId: string) => {
       console.log(songId);
       
     },
