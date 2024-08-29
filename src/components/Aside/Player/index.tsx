@@ -5,6 +5,7 @@ import { Song } from '../../types'
 import './index.css'
 
 const songInProgress:Song = {
+    id:'',
     preview: '',
     name: '',
     artist: '',
