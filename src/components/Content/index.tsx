@@ -1,7 +1,11 @@
-import { BannerContet } from "./BannerContet"
-import { FilterContect } from "./FilterContet"
-import { ListSong } from "./ListSong"
+import { Route, Switch } from "wouter"
 import { TopBarContect } from "./TopBarContent"
+import { Home } from "../../page/home"
+import { Search } from "../../page/search"
+import { Playlist } from "../../page/playlist"
+import { Artist } from "../../page/artist"
+import { Albums } from "../../page/albums"
+import { AlbumDetail } from "../../page/albumDetail"
 
 export const Content = () => {
     
@@ -9,9 +13,15 @@ export const Content = () => {
         <div className="content">
             <TopBarContect />
             <section className="mainContent">
-                <BannerContet />
-                <FilterContect />
-                <ListSong />
+                <Switch>
+                    <Route path="/" component={Home} />
+                    <Route path="/search" component={Search} />
+                    <Route path="/albums" component={Albums} />
+                    <Route path="/albums/:id" component={AlbumDetail} />
+                    <Route path="/artist" component={Artist} />
+                    <Route path="/playlist" component={Playlist} />
+                    <Route>404: No such page!</Route>
+                </Switch>
             </section>
         </div>
     )

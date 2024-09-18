@@ -14,8 +14,13 @@
 }
 
 .containerListSongs.list .basicInformation p {
-    width: 50%;
     margin: 0;
+    text-align: left;
+    padding-left: 1rem;
+}
+
+.containerListSongs.list .basicInformation .nameSong {
+    width: 60%;
 }
 
 .itemSong .moreInformation {

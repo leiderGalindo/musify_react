@@ -21,6 +21,7 @@ export const Sidebar = () => {
                         <ItemMenu 
                             icon={Section.icon} 
                             label={Section.label} 
+                            to={Section.to}
                             key={index}  
                         />
                     ))}
@@ -33,6 +34,7 @@ export const Sidebar = () => {
                         <ItemMenu 
                             icon={Section.icon} 
                             label={Section.label} 
+                            to={Section.to}
                             key={index}  
                         />
                     ))}

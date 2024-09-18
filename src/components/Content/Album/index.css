@@ -1,0 +1,91 @@
+.itemAlbum {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+/* grid */
+.albumListContainer.grid .itemAlbum {
+  display: grid;
+  gap: 10px;
+  color: #fff;
+  grid-template-columns: 1fr;
+  justify-content: center;
+  border-radius: 19px;
+  padding-bottom: 20px;
+  box-shadow: 0 0 4px rgba(255, 255, 255, .1);
+}
+
+.albumListContainer.grid .itemAlbum .containerImg {
+  position: relative;
+}
+
+.albumListContainer.grid .itemAlbum .containerImg:before {
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: none;
+  content: ' ';
+  filter: invert(1);
+  position: absolute;
+  background-size: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(/app_utils/imgs/playstation-triangle.png);
+}
+.albumListContainer.grid .itemAlbum:hover .containerImg:before {
+  display: block;
+}
+
+.albumListContainer.grid .itemAlbum .basicInformation p {
+  margin: 0;
+}
+
+.albumListContainer.grid .itemAlbum:hover {
+  background-color: var(--color-backgroud-hover);
+  border-radius: 20px;
+}
+
+.albumListContainer.grid .itemAlbum:hover img {
+  transform: scale(.9);
+  filter: blur(2px);
+  transition: 1s;
+}
+.albumListContainer.grid .itemAlbum:hover div::before img {
+  content: '';
+  width: 100%;
+  height: 100%;
+  background-color: red;
+}
+
+.albumListContainer.grid .itemAlbum img {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  transition: 1s;
+}
+.albumListContainer.grid .itemAlbum .basicInformation{
+  gap: 5px;
+  display: grid;
+  width: 100%;
+}
+
+.albumListContainer.grid .moreInformation{
+  display: none;
+}
+
+@media (width < 900px){
+  .albumListContainer.list .itemAlbum .moreInformation .hiddenXs {
+      display: none;
+  }   
+
+  .albumListContainer.grid .itemAlbum {
+      padding: 0px;
+  }
+
+  .albumListContainer.list .itemAlbum .moreInformation {
+      display: flex;
+  }
+}

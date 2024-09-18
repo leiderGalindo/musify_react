@@ -28,6 +28,7 @@ export const getSongs = async ({ token, SearchParameter }:Props) => {
       const tracks = (res.tracks.items ?? [])
       const trackList:Song[] = []
       tracks.map((track:any) => {
+        const duration = ((track.duration_ms / 60000).toFixed(2)).replace('.', ':')
         trackList.push({
           id: track.id,
           preview: (track.album.images[1].url ?? 'app_utils/imgs/songs/Cover.png'),
@@ -35,7 +36,7 @@ export const getSongs = async ({ token, SearchParameter }:Props) => {
           artist: track.artists[0].name,
           likes: track.popularity,
           reproductions: track.popularity,
-          duration: track.duration_ms,
+          duration: duration,
         })
       })
       

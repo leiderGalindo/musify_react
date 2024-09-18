@@ -13,5 +13,24 @@ export interface Song {
     artist:         string,
     likes:          string,
     reproductions:  string,
-    duration:       number,
+    duration:       string,
+}
+
+export interface Album {
+    id:             string,
+    preview:        string,
+    name:           string,
+    artist:         string,
+    link:           string,
+    release_date:   string,
+}
+
+export interface AlbumDetail {
+    id:             string,
+    preview:        string,
+    name:           string,
+    artist:         string,
+    link:           string,
+    release_date:   string,
+    tracks:         Song[],
 }

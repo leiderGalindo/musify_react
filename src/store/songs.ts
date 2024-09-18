@@ -1,11 +1,15 @@
-import { type Song } from "../components/types"
+import { type Song, type Album, type AlbumDetail } from "../components/types"
 import { create } from "zustand"
 import { persist } from 'zustand/middleware'
 import { getToken } from "../services/token"
 import { getSongs } from "../services/songs"
+import { getAlbums } from "../services/albums"
+import { getAlbum } from "../services/album"
 
 interface State {
   songList: Song[]
+  listOfAlbums: Album[]
+  album: AlbumDetail
   currentSong: {}
   statusMenu: string
   token: string
@@ -13,6 +17,8 @@ interface State {
   tokenExpiresIn: number
   getToken: () => void
   fetchSongs: (SearchParameter: string) => void
+  fetchAlbums: () => void
+  fetchAlbumDetail: (Id: string) => void
   selectSong: (songId: string) => void
   ChangeMenuStatus: () => void
   ChangeListingStyle: () => void
@@ -20,6 +26,8 @@ interface State {
 
 export const useSongsStore = create<State>()(persist((set, get) => ({
   songList: [],
+  listOfAlbums: [],
+  album: {},
   currentSong: {},
   statusMenu: '',
   token: '',
@@ -54,6 +62,44 @@ export const useSongsStore = create<State>()(persist((set, get) => ({
     
     if(newTrackList)
       set({ songList: newTrackList })
+  },
+
+  fetchAlbums: async () => {
+    const { token } = get()
+    const { tokenExpiresIn } = get()
+    const { getToken } = get()
+
+    // Valida si el token ya fue obtenido o si ya expiro de no ser asi lo obtiene
+    if(token === '' || 
+      (tokenExpiresIn < new Date().getTime())
+    ){
+      await getToken() 
+    }
+
+    const response = await getAlbums({ token })
+    const newListOfAlbums = (response ?? [])
+    
+    if(newListOfAlbums)
+      set({ listOfAlbums: newListOfAlbums })
+  },
+
+  fetchAlbumDetail: async (Id: string) => {
+    const { token } = get()
+    const { tokenExpiresIn } = get()
+    const { getToken } = get()
+
+    // Valida si el token ya fue obtenido o si ya expiro de no ser asi lo obtiene
+    if(token === '' || 
+      (tokenExpiresIn < new Date().getTime())
+    ){
+      await getToken() 
+    }
+
+    const response = await getAlbum({ token, Id })
+    const newAlbumDetail = (response ?? [])
+    
+    if(newAlbumDetail)
+      set({ album: newAlbumDetail })
   },
 
   selectSong: (songId: string) => {

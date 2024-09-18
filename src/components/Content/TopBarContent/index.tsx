@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import { useDebounce } from "@uidotdev/usehooks";
+import { useLocation } from "wouter";
 import { ChevronLeft, ChevronRight, IconSearch, Menu } from "../../../icons";
 import { useSongsStore } from "../../../store/songs";
 import "./index.css";
@@ -5,19 +8,35 @@ import "./index.css";
 export const TopBarContect = () => {
     const statusMenu = useSongsStore(state => state.statusMenu)
     const ChangeMenuStatus = useSongsStore(state => state.ChangeMenuStatus)
-    
+    const fetchSongs    = useSongsStore(state => state.fetchSongs)
+    const [ searchTerm, setSearchTerm ] = useState('')
+    const [ location, setLocation  ] = useLocation()
+    const debouncedSearchTerm = useDebounce(searchTerm, 300)
+
+    // Realiza la busqueda
+    useEffect(() => {
+        if(debouncedSearchTerm){
+            fetchSongs(searchTerm)
+        }
+    }, [debouncedSearchTerm])
+
     // Click para ir atras
     const handelClickBack = () => {
-        console.log('Back')
+        history.back()
     }
     
     // Click para ir adelante
     const handelClickNext = () => {
-        console.log('Next')
+        history.go(1)
     }
+
     // Click para ir adelante
-    const handelClickSearch = () => {
-        console.log('Next')
+    const handelClickSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+        // Valida si la ubicacion actual es la pagina se search de no ser asi setea dicha ubicacion
+        if(location != '/search') 
+            setLocation('/search')
+            
+        setSearchTerm(event.target.value)
     }
     
     return (
@@ -32,7 +51,13 @@ export const TopBarContect = () => {
             </div>
             <div className="ContainerSearch">
                 <IconSearch />
-                <input type="text" className="searchInput" placeholder="sddsd" onChange={handelClickSearch} />
+                <input 
+                    type="text" 
+                    className="searchInput" 
+                    placeholder="¿Que quieres reproducir?" 
+                    value={searchTerm}
+                    onChange={handelClickSearch}
+                />
             </div>
         </section>
     )
