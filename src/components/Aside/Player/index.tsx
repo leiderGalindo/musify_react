@@ -11,7 +11,7 @@ const songInProgress:Song = {
     artist: '',
     likes: '',
     reproductions: '',
-    duration: 11
+    duration: '11'
 }
 
 export const Player = () => {

@@ -6,6 +6,16 @@ import { getSongs } from "../services/songs"
 import { getAlbums } from "../services/albums"
 import { getAlbum } from "../services/album"
 
+const initialValueAlbum = {
+  id: '',
+  preview: '',
+  name: '',
+  artist: '',
+  link: '',
+  release_date: '',
+  tracks: []
+}
+
 interface State {
   songList: Song[]
   listOfAlbums: Album[]
@@ -27,7 +37,7 @@ interface State {
 export const useSongsStore = create<State>()(persist((set, get) => ({
   songList: [],
   listOfAlbums: [],
-  album: {},
+  album: initialValueAlbum,
   currentSong: {},
   statusMenu: '',
   token: '',
