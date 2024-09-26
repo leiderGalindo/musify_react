@@ -94,6 +94,7 @@ export const useSongsStore = create<State>()(persist((set, get) => ({
   },
 
   fetchAlbumDetail: async (Id: string) => {
+    set({ album: initialValueAlbum })
     const { token } = get()
     const { tokenExpiresIn } = get()
     const { getToken } = get()

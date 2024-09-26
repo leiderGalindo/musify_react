@@ -1,0 +1,22 @@
+.ContainerDetailAlbum {
+  padding: 1rem;
+}
+
+.ContainerDetailAlbum .border {
+  display: grid;
+  grid-template-columns: 20% 80%;
+  padding: 20px 0;
+  gap: 20px;
+  text-align: left;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255,255,255, .4);
+  margin-bottom: 1rem;
+}
+
+.ContainerDetailAlbum .PreviewAlbum img {
+  width: 100%;
+}
+
+.ContainerDetailAlbum .DetailAlbum .albumName {
+  margin: 1rem 0;
+}

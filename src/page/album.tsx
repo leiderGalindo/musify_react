@@ -1,8 +1,9 @@
 import { useEffect } from "react"
 import { useParams } from "wouter";
 import { useSongsStore } from "../store/songs";
+import { AlbumDetail } from "../components/Content/AlbumDetail"
 
-export const AlbumDetail = () => {
+export const Album = () => {
   const fetchAlbumDetail = useSongsStore(state => state.fetchAlbumDetail)
   const albumDetail = useSongsStore(state => state.album)
   // const albumDetail = {}
@@ -10,8 +11,6 @@ export const AlbumDetail = () => {
   const IdAlbum = (params.id ?? '')
   
   console.log(albumDetail);
-  
-  
   useEffect(() => {
     if(IdAlbum)
       fetchAlbumDetail(IdAlbum)
@@ -19,9 +18,9 @@ export const AlbumDetail = () => {
   
   return (
     <>
-      {(typeof albumDetail.name === 'undefined') && <h1>Loading...</h1>}
+      {(!albumDetail.id) && <h1>Loading...</h1>}
 
-      {((albumDetail.name ?? '') !== '') && <h1>sdsd</h1>}
+      {((albumDetail.name ?? '') !== '') && <AlbumDetail album={albumDetail} />}
     </>
   )
 }

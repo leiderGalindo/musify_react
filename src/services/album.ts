@@ -1,4 +1,4 @@
-import { AlbumDetail } from "../components/types"
+import { AlbumDetail, type Song } from "../components/types"
 
 const BaseUrlApi  = import.meta.env.VITE_BASE_URL_API
 
@@ -28,6 +28,20 @@ export const getAlbum = async ({ token, Id }:Props) => {
       const responseData = (res ?? [])
       // console.log(responseData);
       
+      const trackList:Song[] = [];
+      (responseData.tracks.items ?? []).map((track:any) => {        
+        const duration = ((track.duration_ms / 60000).toFixed(2)).replace('.', ':')
+        trackList.push({
+          id: track.id,
+          preview: (responseData.images[0].url ?? 'app_utils/imgs/albums/Cover.png'),
+          name: track.name,
+          artist: track.artists[0].name,
+          likes: '99',
+          reproductions: '99',
+          duration: duration,
+        })
+      })
+
       // Seteamos la data de la respuesta en la info del album consultado
       const album:AlbumDetail = {
         id: responseData.id,
@@ -36,7 +50,7 @@ export const getAlbum = async ({ token, Id }:Props) => {
         artist: responseData.artists[0].name,
         link: responseData.href,
         release_date: responseData.release_date,
-        tracks: (responseData.tracks.items ?? []),
+        tracks: trackList,
       }
       
       return album
