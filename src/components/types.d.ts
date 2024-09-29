@@ -1,9 +1,17 @@
 export interface Artist {
-    id:         number;
+    id:         string;
     image:      string;
     name:       string;
     followers:  number;
     listener:   number;
+}
+export interface ArtistDetail {
+    id:         string;
+    image:      string;
+    name:       string;
+    followers:  number;
+    listener:   number;
+    albums:     Album[];
 }
 
 export interface Song {

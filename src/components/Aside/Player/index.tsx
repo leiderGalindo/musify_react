@@ -16,7 +16,7 @@ const songInProgress:Song = {
 
 export const Player = () => {
     const [ playing, setPlaying ] = useState(false)
-    const SongPreview = ((songInProgress.preview != '') ? songInProgress.preview : 'app_utils/imgs/there_is_no_song.png')
+    const SongPreview = ((songInProgress.preview != '') ? songInProgress.preview : '/app_utils/imgs/there_is_no_song.png')
     
     const handelChangePlaybackStatus = () => {
         setPlaying(!playing)

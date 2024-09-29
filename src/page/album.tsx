@@ -10,7 +10,6 @@ export const Album = () => {
   const params = useParams();
   const IdAlbum = (params.id ?? '')
   
-  console.log(albumDetail);
   useEffect(() => {
     if(IdAlbum)
       fetchAlbumDetail(IdAlbum)

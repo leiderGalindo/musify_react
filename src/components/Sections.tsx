@@ -11,7 +11,7 @@ import {
 export const Sections = [
     {icon: <Home />, label: 'Home', to: '/'},
     {icon: <Albums />, label: 'Albums', to: '/albums'},
-    {icon: <Artis />, label: 'Artist', to: '/artist'},
+    {icon: <Artis />, label: 'Artist', to: '/artists'},
     {icon: <Microphone />, label: 'Podcasts', to: '/playlist'},
 ]
 

@@ -3,6 +3,7 @@ import { TopBarContect } from "./TopBarContent"
 import { Home } from "../../page/home"
 import { Search } from "../../page/search"
 import { Playlist } from "../../page/playlist"
+import { Artists } from "../../page/artists"
 import { Artist } from "../../page/artist"
 import { Albums } from "../../page/albums"
 import { Album } from "../../page/album"
@@ -18,7 +19,8 @@ export const Content = () => {
                     <Route path="/search" component={Search} />
                     <Route path="/albums" component={Albums} />
                     <Route path="/albums/:id" component={Album} />
-                    <Route path="/artist" component={Artist} />
+                    <Route path="/artists" component={Artists} />
+                    <Route path="/artists/:id" component={Artist} />
                     <Route path="/playlist" component={Playlist} />
                     <Route>404: No such page!</Route>
                 </Switch>

@@ -1,8 +1,8 @@
-.ContainerDetailAlbum {
+.ContainerDetailArtist {
   padding: 1rem;
 }
 
-.ContainerDetailAlbum .border {
+.ContainerDetailArtist .border {
   display: grid;
   grid-template-columns: 20% 80%;
   padding: 20px 0;
@@ -13,17 +13,21 @@
   margin-bottom: 1rem;
 }
 
-.ContainerDetailAlbum .PreviewAlbum img {
+.ContainerDetailArtist .PreviewArtist img {
   width: 100%;
   border-radius: 10px;
 }
 
-.ContainerDetailAlbum .DetailAlbum .albumName {
+.ContainerDetailArtist .DetailArtist .artistName {
   margin: 1rem 0;
 }
 
+.albumListContainer{
+  padding: 0 1rem;
+}
+
 @media (width < 900px){
-  .ContainerDetailAlbum .border {
+  .ContainerDetailArtist .border {
     grid-template-columns: 1fr;
   }
 }

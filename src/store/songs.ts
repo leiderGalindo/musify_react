@@ -1,10 +1,18 @@
-import { type Song, type Album, type AlbumDetail } from "../components/types"
+import { 
+    type Song, 
+    type Album, 
+    type AlbumDetail, 
+    type Artist, 
+    type ArtistDetail 
+} from "../components/types"
 import { create } from "zustand"
 import { persist } from 'zustand/middleware'
 import { getToken } from "../services/token"
 import { getSongs } from "../services/songs"
 import { getAlbums } from "../services/albums"
 import { getAlbum } from "../services/album"
+import { getArtists } from "../services/artists"
+import { getArtist } from "../services/artist"
 
 const initialValueAlbum = {
   id: '',
@@ -16,10 +24,21 @@ const initialValueAlbum = {
   tracks: []
 }
 
+const initialValueArtist = {
+  id: '',
+  image: '',
+  name: '',
+  followers: 0,
+  listener: 0,
+  albums: []
+}
+
 interface State {
   songList: Song[]
   listOfAlbums: Album[]
+  listOfArtist: Artist[]
   album: AlbumDetail
+  artist: ArtistDetail
   currentSong: {}
   statusMenu: string
   token: string
@@ -29,6 +48,8 @@ interface State {
   fetchSongs: (SearchParameter: string) => void
   fetchAlbums: () => void
   fetchAlbumDetail: (Id: string) => void
+  fetchArtists: () => void
+  fetchArtist: (Id: string) => void
   selectSong: (songId: string) => void
   ChangeMenuStatus: () => void
   ChangeListingStyle: () => void
@@ -37,7 +58,9 @@ interface State {
 export const useSongsStore = create<State>()(persist((set, get) => ({
   songList: [],
   listOfAlbums: [],
+  listOfArtist: [],
   album: initialValueAlbum,
+  artist: initialValueArtist,
   currentSong: {},
   statusMenu: '',
   token: '',
@@ -86,7 +109,8 @@ export const useSongsStore = create<State>()(persist((set, get) => ({
       await getToken() 
     }
 
-    const response = await getAlbums({ token })
+    const IdArtist = false
+    const response = await getAlbums({ token, IdArtist })
     const newListOfAlbums = (response ?? [])
     
     if(newListOfAlbums)
@@ -111,6 +135,56 @@ export const useSongsStore = create<State>()(persist((set, get) => ({
     
     if(newAlbumDetail)
       set({ album: newAlbumDetail })
+  },
+
+  fetchArtists: async () => {
+    const { token } = get()
+    const { tokenExpiresIn } = get()
+    const { getToken } = get()    
+
+    // Valida si el token ya fue obtenido o si ya expiro de no ser asi lo obtiene
+    if(token === '' || 
+      (tokenExpiresIn < new Date().getTime())
+    ){
+      await getToken()
+    }
+
+    const response = await getArtists({ token })
+    const newListOfArtist = (response ?? [])
+    
+    if(newListOfArtist)
+      set({ listOfArtist: newListOfArtist })
+  },
+
+  fetchArtist: async (IdArtist: string) => {
+    set({ artist: initialValueArtist })
+    const { token } = get()
+    const { tokenExpiresIn } = get()
+    const { getToken } = get()
+
+    // Valida si el token ya fue obtenido o si ya expiro de no ser asi lo obtiene
+    if(token === '' || 
+      (tokenExpiresIn < new Date().getTime())
+    ){
+      await getToken()
+    }
+
+    const response = await getArtist({ token, IdArtist })
+    const artist = (response ?? [])
+
+    if(artist){
+      const albums = await getAlbums({ token, IdArtist })
+      // Valida si existen albums
+      if(!albums) return false
+
+      const newArtist:ArtistDetail = {
+        ...artist,
+        albums: albums
+      }
+      
+      if(newArtist)
+        set({ artist: newArtist })
+    }
   },
 
   selectSong: (songId: string) => {

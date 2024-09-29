@@ -8,8 +8,6 @@ interface props {
 
 export const AlbumDetail = ({ album }: props) => {
   const ReleaseDate = new Date(album.release_date).toLocaleDateString('es-CO', { weekday:"long", year:"numeric", month:"short", day:"numeric"})
-
-  console.log(album.tracks);
   
   return (
     <>

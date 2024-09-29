@@ -4,9 +4,10 @@ const BaseUrlApi  = import.meta.env.VITE_BASE_URL_API
 
 interface Props {
   token: string
+  IdArtist: string|boolean
 }
 
-export const getAlbums = async ({ token }:Props) => {
+export const getAlbums = async ({ token, IdArtist = false }:Props) => {
   if(token === '') return false
   
   const myHeaders = new Headers();
@@ -18,13 +19,24 @@ export const getAlbums = async ({ token }:Props) => {
     redirect: "follow"
   }
 
-  return await fetch(`${BaseUrlApi}/browse/new-releases?limit=20`, requestOptions)
+  let url = ''
+  if(IdArtist)
+    url = `${BaseUrlApi}/artists/${IdArtist}/albums`
+  else
+    url = `${BaseUrlApi}/browse/new-releases?limit=20`
+
+  return await fetch(url, requestOptions)
     .then(async res => {
       if(!res.ok) throw new Error('Error get albums spotify')
       return await res.json()
     })
     .then(res => {
-      const albums = (res.albums.items ?? [])
+      let albums = []
+      if(IdArtist)
+        albums = (res.items ?? []) 
+      else
+        albums = (res.albums.items ?? []) 
+      
       const listAlbums:Album[] = []
 
       albums.map((album:any) => {

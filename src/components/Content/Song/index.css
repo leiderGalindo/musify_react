@@ -171,4 +171,11 @@
     .containerListSongs.list .itemSong .moreInformation {
         display: flex;
     }
+
+    .containerListSongs.list .basicInformation .nameSong {
+        width: 100%;
+    }
+    .containerListSongs.list .basicInformation .artisName {
+        display: none;
+    }
 }
