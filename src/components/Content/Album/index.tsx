@@ -7,7 +7,8 @@ interface Props {
 }
 
 export const Album = ({ album }:Props) => {
-  const linkDetail = `http://localhost:5173/albums/${album.id}`
+  const domain = window.origin  
+  const linkDetail = `${domain}/albums/${album.id}`
   
   return (
     <Link href={linkDetail}>
