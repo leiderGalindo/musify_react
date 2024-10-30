@@ -1,0 +1,64 @@
+.itemSongEpisode {
+  width: auto;
+  padding: 10px;
+  border-bottom: 1px solid var(--color-backgroud-hover);
+}
+
+.itemSongEpisode:hover {
+  border-bottom: 0px;
+}
+
+.itemSongEpisode .containerImg img{
+  width: 150px;
+  max-width: max-content !important;
+}
+
+.basicEpisodeInformation {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding: 0 15px;
+  gap: 7px;
+}
+
+.basicEpisodeInformation p {
+  margin: 0;
+}
+
+.nameEpisode {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.descriptionEpisode{
+  font-size: 0.9em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.episodeActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.episodeActions .playSong {
+  border-radius: 50%;
+  border: 1px solid;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.episodeActions .playSong svg {
+  width: 20px;
+}
+
+.episodeActions .playSong:hover {
+  transform: scale(1.15);
+}

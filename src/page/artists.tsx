@@ -1,15 +1,23 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useSongsStore } from "../store/songs"
-import { ListOfArtists } from "../components/Content/ArtistList"
+import { SectionContent } from "../components/Content/SectionContent"
+import { Artist } from "../components/Content/Artist"
 
 export const Artists = () => {
   const fetchArtists = useSongsStore(state => state.fetchArtists)
+  const ListOfArtist = useSongsStore(state => state.listOfArtist)
+  const [isLoading, setIsLoading] = useState((ListOfArtist.length === 0 || typeof ListOfArtist.length === 'undefined'))
 
   useEffect(() => {
     fetchArtists()
+    setIsLoading(false)
   }, [])
 
   return (
-    <ListOfArtists/>
+    <SectionContent Content={{title: 'Artists'}} IsLoading={isLoading}>
+      {ListOfArtist.map((artist, index) => {
+        return <Artist artist={artist} key={index} />
+      })}
+    </SectionContent>
   )
 }

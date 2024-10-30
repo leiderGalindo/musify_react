@@ -13,8 +13,6 @@ export const Artist = () => {
     fetchArtist(IdArtist)
   }, [])
   
-  console.log(artistData);
-  
   return (
     <>
       {(!artistData.id) && <h1>Loading...</h1>}

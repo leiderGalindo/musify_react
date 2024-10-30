@@ -1,4 +1,15 @@
-.itemAlbum {
+.cardContainer {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.cardContainer.grid {
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.itemCard {
   width: 100%;
   display: flex;
   align-items: center;
@@ -7,7 +18,7 @@
 }
 
 /* grid */
-.albumListContainer.grid .itemAlbum {
+.cardContainer.grid .itemCard {
   display: grid;
   gap: 10px;
   color: #fff;
@@ -18,11 +29,11 @@
   box-shadow: 0 0 4px rgba(255, 255, 255, .1);
 }
 
-.albumListContainer.grid .itemAlbum .containerImg {
+.cardContainer.grid .itemCard .containerImg {
   position: relative;
 }
 
-.albumListContainer.grid .itemAlbum .containerImg:before {
+.cardContainer.grid .itemCard .containerImg:before {
   z-index: 1;
   width: 100%;
   height: 100%;
@@ -35,57 +46,62 @@
   background-repeat: no-repeat;
   background-image: url(/app_utils/imgs/playstation-triangle.png);
 }
-.albumListContainer.grid .itemAlbum:hover .containerImg:before {
+.cardContainer.grid .itemCard:hover .containerImg:before {
   display: block;
 }
 
-.albumListContainer.grid .itemAlbum .basicInformation p {
+.cardContainer.grid .itemCard .basicInformation p {
   margin: 0;
 }
 
-.albumListContainer.grid .itemAlbum:hover {
+.cardContainer.grid .itemCard:hover {
   background-color: var(--color-backgroud-hover);
   border-radius: 20px;
 }
 
-.albumListContainer.grid .itemAlbum:hover img {
+.cardContainer.grid .itemCard:hover img {
   transform: scale(.9);
   filter: blur(2px);
   transition: 1s;
 }
-.albumListContainer.grid .itemAlbum:hover div::before img {
+.cardContainer.grid .itemCard:hover div::before img {
   content: '';
   width: 100%;
   height: 100%;
   background-color: red;
 }
 
-.albumListContainer.grid .itemAlbum img {
+.cardContainer.grid .itemCard img {
   width: 100%;
   height: 100%;
   border-radius: 20px;
   transition: 1s;
 }
-.albumListContainer.grid .itemAlbum .basicInformation{
+.cardContainer.grid .itemCard .basicInformation{
   gap: 5px;
   display: grid;
   width: 100%;
 }
 
-.albumListContainer.grid .moreInformation{
+.cardContainer.grid .moreInformation{
   display: none;
 }
 
 @media (width < 900px){
-  .albumListContainer.list .itemAlbum .moreInformation .hiddenXs {
+  .cardContainer.grid {
+    grid-template-columns: repeat(auto-fill, minmax(125px, 1fr));
+    gap: 10px;
+  }
+  
+  .cardContainer.list .itemCard .moreInformation .hiddenXs {
       display: none;
   }   
 
-  .albumListContainer.grid .itemAlbum {
+  .cardContainer.grid .itemCard {
       padding: 0px;
   }
 
-  .albumListContainer.list .itemAlbum .moreInformation {
+  .cardContainer.list .itemCard .moreInformation {
       display: flex;
   }
 }

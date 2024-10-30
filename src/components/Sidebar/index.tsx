@@ -1,13 +1,21 @@
+import { useEffect } from "react"
+import { useLocation } from "wouter"
+import { useSongsStore } from '../../store/songs'
 import { Sections, SectionsMyLibrary } from "../Sections"
 import { Close } from "../../icons"
 import { ItemMenu } from "../ItemMenu"
 import { User } from "../user"
 import './index.css'
-import { useSongsStore } from '../../store/songs'
 
 export const Sidebar = () => {
+    const [ location ] = useLocation()
     const statusMenu = useSongsStore(state => state.statusMenu)
     const ChangeMenuStatus = useSongsStore(state => state.ChangeMenuStatus)
+
+    // Al cambiar de ubicacion oculta el menu
+    useEffect(() => {
+        ChangeMenuStatus()
+    }, [location])
 
     return (
         <section className={`mainSidebar ${statusMenu}`}>

@@ -3,7 +3,9 @@ import {
     type Album, 
     type AlbumDetail, 
     type Artist, 
-    type ArtistDetail 
+    type ArtistDetail, 
+    type Podcast, 
+    type PodcastDetail
 } from "../components/types"
 import { create } from "zustand"
 import { persist } from 'zustand/middleware'
@@ -13,6 +15,8 @@ import { getAlbums } from "../services/albums"
 import { getAlbum } from "../services/album"
 import { getArtists } from "../services/artists"
 import { getArtist } from "../services/artist"
+import { getPodcasts } from "../services/podcasts"
+import { getPodcast } from "../services/podcast"
 
 const initialValueAlbum = {
   id: '',
@@ -33,12 +37,23 @@ const initialValueArtist = {
   albums: []
 }
 
+const initialValuePodcast = {
+  id: '',
+  image: '',
+  name: '',
+  followers: 0,
+  listener: 0,
+  episodes: []
+}
+
 interface State {
   songList: Song[]
   listOfAlbums: Album[]
   listOfArtist: Artist[]
+  listOfPodcasts: Podcast[]
   album: AlbumDetail
   artist: ArtistDetail
+  podcast: PodcastDetail
   currentSong: {}
   statusMenu: string
   token: string
@@ -50,6 +65,8 @@ interface State {
   fetchAlbumDetail: (Id: string) => void
   fetchArtists: () => void
   fetchArtist: (Id: string) => void
+  fetchPodcasts: () => void
+  fetchPodcast: (Id: string) => void
   selectSong: (songId: string) => void
   ChangeMenuStatus: () => void
   ChangeListingStyle: () => void
@@ -59,8 +76,10 @@ export const useSongsStore = create<State>()(persist((set, get) => ({
   songList: [],
   listOfAlbums: [],
   listOfArtist: [],
+  listOfPodcasts: [],
   album: initialValueAlbum,
   artist: initialValueArtist,
+  podcast: initialValuePodcast,
   currentSong: {},
   statusMenu: '',
   token: '',
@@ -184,6 +203,55 @@ export const useSongsStore = create<State>()(persist((set, get) => ({
       
       if(newArtist)
         set({ artist: newArtist })
+    }
+  },
+
+  fetchPodcasts: async () => {
+    const { token, tokenExpiresIn, getToken } = get()
+
+    // Valida si el token ya fue obtenido o si ya expiro de no ser asi lo obtiene
+    if(token === '' || 
+      (tokenExpiresIn < new Date().getTime())
+    ){
+      await getToken()
+    }
+
+    const response = await getPodcasts({ token })
+    const newListOfPodcasts = (response ?? [])
+    console.log(newListOfPodcasts);
+            
+    if(newListOfPodcasts)
+      set({ listOfPodcasts: newListOfPodcasts })
+  },
+
+  fetchPodcast: async (IdPodcast: string) => {
+    set({ podcast: initialValuePodcast })
+    const { token, tokenExpiresIn, getToken, listOfPodcasts } = get()
+    const selectedPodcasts = listOfPodcasts.filter(podcast => podcast.id === IdPodcast)    
+
+    // Valida si el token ya fue obtenido o si ya expiro de no ser asi lo obtiene
+    if(token === '' || 
+      (tokenExpiresIn < new Date().getTime())
+    ){
+      await getToken()
+    }
+
+    if(selectedPodcasts){
+      const response = await getPodcast({ token, IdPodcast })
+      const episodeslist = (response ?? [])
+      
+      // Valida si existen albums
+      if(!episodeslist) return false
+
+      const newDetailPodcasts:PodcastDetail = {
+        id: selectedPodcasts[0].id,
+        image: selectedPodcasts[0].image,
+        name: selectedPodcasts[0].name,
+        episodes: episodeslist
+      }
+      
+      if(newDetailPodcasts)
+        set({ podcast: newDetailPodcasts })
     }
   },
 

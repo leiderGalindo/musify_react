@@ -42,3 +42,33 @@ export interface AlbumDetail {
     release_date:   string,
     tracks:         Song[],
 }
+
+export interface Podcast {
+    id:         string;
+    image:      string;
+    name:       string;
+    episodes:   number;
+}
+export interface PodcastDetail {
+    id:         string;
+    image:      string;
+    name:       string;
+    episodes:   Episode[];
+}
+
+export interface Episode {
+    id:             string;
+    image:          string;
+    name:           string;
+    duration:       string;
+    release_date:   string;
+    description:    string;
+    preview:        string;
+}
+
+export interface DetailCard {
+    title:          string,
+    image:          string,
+    linkDetail:     string,
+    adicionalData:  string
+}

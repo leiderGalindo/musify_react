@@ -1,5 +1,5 @@
 import { ArtistDetail as ArtistDetailType } from "../../../components/types"
-import { Album } from "../Album"
+import { ItemCard } from "../ItemCard"
 import "./index.css"
 
 interface Props {
@@ -24,9 +24,16 @@ export const ArtistDetail = ({ artist }: Props) => {
         </div>
       </div>
 
-      <section className='albumListContainer grid'>
+      <section className='cardContainer grid'>
         {(artist.albums).map((album, index) => {
-            return <Album album={album} key={index} />
+          const domain = window.origin
+          const Item = {
+            linkDetail: `${domain}/albums/${album.id}`,
+            title: album.name,
+            image: album.preview,
+            adicionalData: `${album.artist}`
+          }
+          return <ItemCard ItemData={Item} key={index} />
         })}
       </section>
     </>
