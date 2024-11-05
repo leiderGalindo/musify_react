@@ -54,7 +54,8 @@ interface State {
   album: AlbumDetail
   artist: ArtistDetail
   podcast: PodcastDetail
-  currentSong: {}
+  currentSong: HTMLAudioElement
+  isPlaying: boolean
   statusMenu: string
   token: string
   listingStyle: string
@@ -70,6 +71,8 @@ interface State {
   selectSong: (songId: string) => void
   ChangeMenuStatus: () => void
   ChangeListingStyle: () => void
+  playSong: (song: string) => void
+  stopSong: () => void
 }
 
 export const useSongsStore = create<State>()(persist((set, get) => ({
@@ -80,7 +83,8 @@ export const useSongsStore = create<State>()(persist((set, get) => ({
   album: initialValueAlbum,
   artist: initialValueArtist,
   podcast: initialValuePodcast,
-  currentSong: {},
+  currentSong: new Audio(),
+  isPlaying: false,
   statusMenu: '',
   token: '',
   listingStyle: 'grid',
@@ -258,6 +262,29 @@ export const useSongsStore = create<State>()(persist((set, get) => ({
   selectSong: (songId: string) => {
     console.log(songId);
     
+  },
+
+  playSong: (song: string) => {
+    const { stopSong, currentSong } = get()
+
+    // Para evitar que se repita el audio
+    if(currentSong) stopSong()
+    
+    const audio = new Audio(song)
+    audio.play()
+
+    set({currentSong: audio, isPlaying: true})
+  },
+
+  stopSong: () => {
+    const { currentSong } = get()
+    
+    
+    if((currentSong.currentTime ?? 0) > 0){
+      currentSong.pause()
+
+      set({ isPlaying: false })
+    }
   },
 
   ChangeMenuStatus: () => {

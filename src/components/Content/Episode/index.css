@@ -1,3 +1,11 @@
+.containerListEpisodes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 20px;
+  margin-bottom: 20px;
+}
+
 .itemSongEpisode {
   width: auto;
   padding: 10px;
@@ -33,6 +41,7 @@
 .descriptionEpisode{
   font-size: 0.9em;
   display: -webkit-box;
+  line-clamp: 2;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;  
   overflow: hidden;
@@ -61,4 +70,43 @@
 
 .episodeActions .playSong:hover {
   transform: scale(1.15);
+}
+
+.containerListEpisodes.list .itemSong .containerImg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.containerListEpisodes.list .itemSong img {
+  max-width: 70px;
+  border-radius: 10px;
+  transition: 1s;
+}
+
+.containerListEpisodes.list .itemSong:hover img {
+  transform: scale(.9);
+  transition: 1s;
+}
+
+.containerListEpisodes.list .itemSong:hover {
+  background-color: var(--color-backgroud-hover);
+  border-radius: 9px;
+  transition: 1s;
+}
+
+@media (max-width: 768px) {
+  .containerListEpisodes {
+    padding: 5px;
+  }
+  .itemSongEpisode {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: start;
+  }
+
+  .itemSongEpisode .containerImg {
+    justify-content: flex-start !important;
+    padding: 15px;
+  }
 }

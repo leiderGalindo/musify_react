@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Heart, Play } from "../../../icons"
+import { Heart, Play, Pause } from "../../../icons"
 import { type Episode as EpisodeType } from "../../types"
+import { useSongsStore } from "../../../store/songs";
 import "./index.css";
 
 interface Porps {
@@ -9,8 +10,12 @@ interface Porps {
 }
 
 export const Episode = ({ EpisodeData, namePodcast }: Porps) => {
-  const [currentAudio, setCurrentAudio] = useState(new Audio())
-  const [isPlaying, setIsPlaying] = useState(false)
+  const playSong = useSongsStore(state => state.playSong)
+  const stopSong = useSongsStore(state => state.stopSong)
+  const currentSong = useSongsStore(state => state.currentSong)
+  const [ isPlaying, setIsPlaying ] = useState(false)
+  
+
   // Formatear milisegundos a minutos y segundos (801201 = 13 min 21 segundos) 
   const formatTime = (time: number) => {
     const totalSeconds = Math.floor(time / 1000);
@@ -25,17 +30,15 @@ export const Episode = ({ EpisodeData, namePodcast }: Porps) => {
     return date.toLocaleDateString("es-ES", { year: 'numeric', month: 'long' });
   }
 
-  // Reproducir audio
-  const PlaySong = (preview: string) => {
-    if(!isPlaying){
-      const audio = new Audio(preview)
-      setCurrentAudio(audio)
-      audio.play()
+  const handelClickPlay = (EpisodeData: string) => {
+    setIsPlaying(false)
 
+    // Valida si el audio actual es el que se quiere reproducir de ser asi se detiene
+    if(EpisodeData === currentSong.src && isPlaying)
+      stopSong()
+    else{
+      playSong(EpisodeData)
       setIsPlaying(true)
-    }else{
-      currentAudio.pause()
-      setIsPlaying(false)
     }
   }
 
@@ -48,7 +51,7 @@ export const Episode = ({ EpisodeData, namePodcast }: Porps) => {
         <div className="basicEpisodeInformation"> 
           <p className="nameEpisode">{EpisodeData.name}</p>
           <p>{namePodcast}</p>
-          <p className="descriptionEpisode">{EpisodeData.description}</p>
+          <p className="descriptionEpisode">{(EpisodeData.description).slice(0, 300)}</p>
           <p className="hiddenXs">
             {formatDate(EpisodeData.release_date)}
             <span className="punto"> • </span>
@@ -58,8 +61,8 @@ export const Episode = ({ EpisodeData, namePodcast }: Porps) => {
             <span className="heartOfSong">
               <Heart/>
             </span>
-            <span className="playSong" onClick={() => PlaySong(EpisodeData.preview)}>
-              <Play/>
+            <span className="playSong" onClick={() => handelClickPlay(EpisodeData.preview)}>
+              { (currentSong.src === EpisodeData.preview && isPlaying) ? <Pause/> : <Play/> }
             </span>
           </div>
         </div>

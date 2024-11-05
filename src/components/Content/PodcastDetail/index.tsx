@@ -6,7 +6,6 @@ interface Props {
 }
 
 export const PodcastDetail = ({ podcast }: Props) => {
-  console.log(podcast);
     
   return (
     <>
@@ -22,7 +21,7 @@ export const PodcastDetail = ({ podcast }: Props) => {
         </div>
       </div>
 
-      <div className="containerListSongs list">
+      <div className="containerListEpisodes list">
         {(podcast.episodes).map(episode => {
           return <Episode EpisodeData={episode} namePodcast={podcast.name} key={episode.id} />
         })}
