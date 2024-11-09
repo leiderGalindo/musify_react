@@ -1,33 +1,22 @@
 import { useState } from 'react'
 import { ArrowsShuffle, Pause, Play, PlayerSkipBack, PlayerSkipForward } from '../../../icons'
 import { SongControl } from './SongControl'
-import { Song } from '../../types' 
+import { useSongsStore } from '../../../store/songs'
 import './index.css'
 
-const songInProgress:Song = {
-    id:'',
-    preview: '',
-    name: '',
-    artist: '',
-    likes: '',
-    reproductions: '',
-    duration: '11'
-}
-
 export const Player = () => {
-    const [ playing, setPlaying ] = useState(false)
+    const { isPlaying, songInProgress } = useSongsStore(state => state)
+    const stopSong = useSongsStore(state => state.stopSong)
+    const nextSong = useSongsStore(state => state.nextSong)
+    const previousSong = useSongsStore(state => state.previousSong)
+    const [ playing, setPlaying ] = useState(isPlaying)
     const SongPreview = ((songInProgress.preview != '') ? songInProgress.preview : '/app_utils/imgs/there_is_no_song.png')
     
     const handelChangePlaybackStatus = () => {
         setPlaying(!playing)
-    }
 
-    const handelClickSkipBack = () => {
-
-    }
-
-    const handelClickSkipForward = () => {
-        
+        if(isPlaying)
+            stopSong()
     }
 
     return (
@@ -44,19 +33,19 @@ export const Player = () => {
                 </div>
             </div>
             <div className='player'>
-                <SongControl audio={songInProgress} />
+                <SongControl songInProgress={songInProgress} />
                 <div className="controls">
                     <button className='secondaryButtons'>
                         <ArrowsShuffle />
                     </button>
-                    <button className='mainButtons' onClick={() => handelClickSkipBack()}>
+                    <button className='mainButtons' onClick={() => previousSong()}>
                         <PlayerSkipBack />
                     </button>
                     <button className='mainButtons' onClick={() => handelChangePlaybackStatus()}>
                         {playing && <Pause />}
                         {!playing && <Play />}
                     </button>
-                    <button className='mainButtons' onClick={() => handelClickSkipForward()}>
+                    <button className='mainButtons' onClick={() => nextSong()}>
                         <PlayerSkipForward />
                     </button>
                     <button className='secondaryButtons'>

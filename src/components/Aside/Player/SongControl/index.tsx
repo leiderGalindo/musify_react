@@ -1,13 +1,13 @@
 import { useState } from "react"
-import { Song } from "../../../types";
+import { songInProgress } from "../../../types";
 
 interface Props {
-    audio: Song
+    songInProgress: songInProgress
 }
 
-export const SongControl = ({ audio }: Props) => {
+export const SongControl = ({ songInProgress }: Props) => {
     const [ currentTime, setCurrentTime ] = useState(80)
-    const duration =  audio.duration
+    const duration =  songInProgress.duration
     const FormattedDuration = '04:20'
 
     const handleChangeCurrentTime = (event: React.ChangeEvent<HTMLInputElement>) => {

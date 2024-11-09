@@ -5,7 +5,9 @@ import {
     type Artist, 
     type ArtistDetail, 
     type Podcast, 
-    type PodcastDetail
+    type PodcastDetail,
+    type DataPlay,
+    type songInProgress
 } from "../components/types"
 import { create } from "zustand"
 import { persist } from 'zustand/middleware'
@@ -46,6 +48,14 @@ const initialValuePodcast = {
   episodes: []
 }
 
+const initialValueSong = {
+  id: '',
+  preview: '',
+  name: '',
+  artist: '',
+  duration: 0
+}
+
 interface State {
   songList: Song[]
   listOfAlbums: Album[]
@@ -55,6 +65,9 @@ interface State {
   artist: ArtistDetail
   podcast: PodcastDetail
   currentSong: HTMLAudioElement
+  songInProgress: songInProgress
+  currentIndex: number
+  currentType: string
   isPlaying: boolean
   statusMenu: string
   token: string
@@ -71,8 +84,10 @@ interface State {
   selectSong: (songId: string) => void
   ChangeMenuStatus: () => void
   ChangeListingStyle: () => void
-  playSong: (song: string) => void
+  playSong: (dataPlay: DataPlay) => void
   stopSong: () => void
+  nextSong: () => void
+  previousSong: () => void
 }
 
 export const useSongsStore = create<State>()(persist((set, get) => ({
@@ -83,7 +98,10 @@ export const useSongsStore = create<State>()(persist((set, get) => ({
   album: initialValueAlbum,
   artist: initialValueArtist,
   podcast: initialValuePodcast,
+  songInProgress: initialValueSong,
   currentSong: new Audio(),
+  currentIndex: 0,
+  currentType: '',
   isPlaying: false,
   statusMenu: '',
   token: '',
@@ -264,8 +282,10 @@ export const useSongsStore = create<State>()(persist((set, get) => ({
     
   },
 
-  playSong: (song: string) => {
+  playSong: (dataPlay: DataPlay) => {
     const { stopSong, currentSong } = get()
+    const { song, duration, type, index } = dataPlay
+    console.log(duration);
 
     // Para evitar que se repita el audio
     if(currentSong) stopSong()
@@ -273,7 +293,30 @@ export const useSongsStore = create<State>()(persist((set, get) => ({
     const audio = new Audio(song)
     audio.play()
 
-    set({currentSong: audio, isPlaying: true})
+    switch (type) { 
+      case 'Podcast':
+        const { podcast } = get()
+        console.log(podcast);
+        
+        const newSongInProgress = {
+          id: podcast.episodes[index].id,
+          preview: podcast.image,
+          name: podcast.episodes[index].name,
+          artist: 'podcast.episodes[index].',
+          duration: duration
+        }
+        console.log(newSongInProgress);
+
+        set({ songInProgress: newSongInProgress})
+      break;
+    }
+
+    set({
+      currentSong: audio, 
+      isPlaying: true,
+      currentType: type,
+      currentIndex: index
+    })
   },
 
   stopSong: () => {
@@ -287,6 +330,62 @@ export const useSongsStore = create<State>()(persist((set, get) => ({
     }
   },
 
+  nextSong: () => {
+    const { currentIndex, currentType } = get()
+    const { stopSong, playSong } = get()
+    let newCurrentSong = {} as DataPlay
+
+    stopSong()
+    const newCurrentIndex = currentIndex + 1
+
+    switch (currentType) {
+      case 'Podcast':
+        const { podcast } = get()
+        const episode = podcast.episodes[newCurrentIndex]
+        console.log(episode);
+        
+        if(!episode) return false
+
+        newCurrentSong = {
+          'song': episode.preview,
+          'duration': parseInt(episode.duration),
+          'index': newCurrentIndex,
+          'type': 'Podcast'
+        }
+      break
+      
+    }
+    
+    if(newCurrentSong) playSong(newCurrentSong)
+    set({ currentIndex: newCurrentIndex })
+  },
+
+  previousSong: () => {
+    const { currentIndex, currentType } = get()
+    const { stopSong, playSong } = get()
+    let newCurrentSong = {} as DataPlay
+
+    stopSong()
+    const newCurrentIndex = currentIndex - 1
+    set({ currentIndex: newCurrentIndex })
+
+    switch (currentType) {
+      case 'Podcast':
+        const { podcast } = get()
+        const episode = podcast.episodes[newCurrentIndex]
+        newCurrentSong = {
+          'song': episode.preview,
+          'duration': parseInt(episode.duration),
+          'index': newCurrentIndex,
+          'type': 'Podcast'
+        }
+        console.log(newCurrentSong);  
+      break;
+    }
+    
+    if(newCurrentSong.song ?? false) playSong(newCurrentSong)
+  },
+
   ChangeMenuStatus: () => {
     const { statusMenu } = get()      
     const NewMenuStatus = ((statusMenu === 'menuActive') ? '' : 'menuActive')
@@ -295,13 +394,13 @@ export const useSongsStore = create<State>()(persist((set, get) => ({
   },
 
   ChangeListingStyle: () => {
-        const { listingStyle } = get()
-        
-        const NewListingStyle = (((listingStyle ?? '') === 'grid') ? 'list' : 'grid')
-        
-        sessionStorage.setItem('listingStyle', NewListingStyle);
+    const { listingStyle } = get()
+    
+    const NewListingStyle = (((listingStyle ?? '') === 'grid') ? 'list' : 'grid')
+    
+    sessionStorage.setItem('listingStyle', NewListingStyle);
 
-        set({ listingStyle: NewListingStyle})
+    set({ listingStyle: NewListingStyle})
   }
 
 }),{

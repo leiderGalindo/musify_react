@@ -17,8 +17,9 @@ export const getPodcasts = async ({ token }: Props) => {
     headers: myHeaders,
     redirect: "follow"
   }
+  const idsPodcasts = '6SZkj9tv4CA5SC681NDn2n,6bCzqGowQUOY1LIksbiEtx,0nS4HH56YVpefoQiaESjqQ,5cyDs78xyEeLVw036if73V,7IYMsCShgqI2KIndBSRbsX,3z7kACV9G41WOljt6AVCIP,1Sdr7Jsq9HxLB3f1633for,4yufQH2A8hHtU5cwojmiwd,7f5Rdm6RukUPsWFtxlEfOb,13vA2Wu7tfIVhJ8NLFqkjx,2Ne8mQXoSobn2aKtsfhnsw,7c6XnTSL3xt7gWCqu7XYpx,4hJBES3FWvMrFipF6cwQhA,1wLL6EYoLRyA8Tpgro5wnE,23xWdo0Uo3pvCyldp4ve4I,5cCRh6i1FDIGU9Xyvcl1Lp,4G8dqwAqwGeokzkmmMcVll,1MJw0ErXqIjeSitlaSNBmW,7I0E0dWqLAVF0LGkJ3vFjU'
 
-  return await fetch(`${BaseUrlApi}/shows?ids=5CfCWKI5pZ28U0uOzXkDHe%2C5as3aKmN2k11yfDDDSrvaZ`, requestOptions)
+  return await fetch(`${BaseUrlApi}/shows?ids=${idsPodcasts}`, requestOptions)
     .then(async res => {
       if(!res.ok) throw new Error('Error get podcast spotify')
       return await res.json()

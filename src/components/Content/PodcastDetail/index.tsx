@@ -22,8 +22,8 @@ export const PodcastDetail = ({ podcast }: Props) => {
       </div>
 
       <div className="containerListEpisodes list">
-        {(podcast.episodes).map(episode => {
-          return <Episode EpisodeData={episode} namePodcast={podcast.name} key={episode.id} />
+        {(podcast.episodes).map((episode, index) => {
+          return <Episode EpisodeData={episode} namePodcast={podcast.name} key={episode.id} index={index} />
         })}
       </div>
     </>

@@ -72,3 +72,18 @@ export interface DetailCard {
     linkDetail:     string,
     adicionalData:  string
 }
+
+export interface DataPlay {
+    song:       string,
+    duration:   number,
+    type:       string,
+    index:      number,
+}
+
+export interface songInProgress {
+    id:         string,
+    preview:    string,
+    name:       string,
+    artist:     string,
+    duration:   number
+}

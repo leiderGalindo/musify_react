@@ -2,6 +2,8 @@
     background-color: var(--color-backgroud-hover);
     border-radius: 40px;
     padding: 1.5rem;
+    max-width: 280px;
+    max-height: 423px;
 }
 
 .containerPlayer .containerPreview {
@@ -13,6 +15,7 @@
 
 .containerPlayer .containerPreview img {
     width: 200px;
+    border-radius: 16px;
 }
 
 .containerPlayer .controls {

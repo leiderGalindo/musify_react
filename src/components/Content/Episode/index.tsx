@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Heart, Play, Pause } from "../../../icons"
 import { type Episode as EpisodeType } from "../../types"
 import { useSongsStore } from "../../../store/songs";
@@ -7,13 +7,20 @@ import "./index.css";
 interface Porps {
   EpisodeData: EpisodeType
   namePodcast: string
+  index: number
 }
 
-export const Episode = ({ EpisodeData, namePodcast }: Porps) => {
+export const Episode = ({ EpisodeData, namePodcast, index }: Porps) => {
   const playSong = useSongsStore(state => state.playSong)
   const stopSong = useSongsStore(state => state.stopSong)
+  const nextSong = useSongsStore(state => state.nextSong)
   const currentSong = useSongsStore(state => state.currentSong)
   const [ isPlaying, setIsPlaying ] = useState(false)
+
+  useEffect(() => {
+    console.log('currentSong', currentSong);
+    
+  }, [currentSong])
   
 
   // Formatear milisegundos a minutos y segundos (801201 = 13 min 21 segundos) 
@@ -30,16 +37,29 @@ export const Episode = ({ EpisodeData, namePodcast }: Porps) => {
     return date.toLocaleDateString("es-ES", { year: 'numeric', month: 'long' });
   }
 
-  const handelClickPlay = (EpisodeData: string) => {
+  const handelClickPlay = (EpisodeData: EpisodeType, index: number) => {
+    const EpisodeDataPreview = EpisodeData.preview
+    const EpisodeDuration  = parseInt(EpisodeData.duration)
+    
     setIsPlaying(false)
 
     // Valida si el audio actual es el que se quiere reproducir de ser asi se detiene
-    if(EpisodeData === currentSong.src && isPlaying)
+    if(EpisodeDataPreview === currentSong.src && isPlaying)
       stopSong()
     else{
-      playSong(EpisodeData)
+      const dataPlay = {
+        'song': EpisodeDataPreview,
+        'duration': EpisodeDuration,
+        'type': 'Podcast',
+        index
+      }
+      playSong(dataPlay)
       setIsPlaying(true)
     }
+
+    setTimeout(() => {
+      nextSong()
+    }, EpisodeDuration)
   }
 
   return (
@@ -61,7 +81,11 @@ export const Episode = ({ EpisodeData, namePodcast }: Porps) => {
             <span className="heartOfSong">
               <Heart/>
             </span>
-            <span className="playSong" onClick={() => handelClickPlay(EpisodeData.preview)}>
+            <span 
+              className="playSong" 
+              id={`play_episode_${index}`}
+              onClick={() => handelClickPlay(EpisodeData, index)}
+            >
               { (currentSong.src === EpisodeData.preview && isPlaying) ? <Pause/> : <Play/> }
             </span>
           </div>
