@@ -1,20 +1,37 @@
 .containerPlayer {
-    background-color: var(--color-backgroud-hover);
-    border-radius: 40px;
-    padding: 1.5rem;
+    display: flex;
+    height: 370px;
+    padding: 1rem;
     max-width: 280px;
     max-height: 423px;
+    border-radius: 40px;
+    background-color: var(--color-backgroud-hover);
+    align-items: normal;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
+.containerPlayer .nameSong {
+    display: -webkit-box;
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 .containerPlayer .containerPreview {
     padding: 1rem;
-    border-radius: 30px;
+    border-radius: 38px;
     margin-bottom: 10px;
-    background-color: var(--color-backgroud-hover);
+    width: 180px;
+    height: 180px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .containerPlayer .containerPreview img {
-    width: 200px;
+    width: 170px;
     border-radius: 16px;
 }
 

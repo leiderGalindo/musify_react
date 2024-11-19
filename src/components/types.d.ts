@@ -85,5 +85,6 @@ export interface songInProgress {
     preview:    string,
     name:       string,
     artist:     string,
-    duration:   number
+    duration:   number,
+    song:       string
 }

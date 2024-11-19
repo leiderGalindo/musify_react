@@ -53,7 +53,8 @@ const initialValueSong = {
   preview: '',
   name: '',
   artist: '',
-  duration: 0
+  duration: 0,
+  song: '',
 }
 
 interface State {
@@ -283,29 +284,33 @@ export const useSongsStore = create<State>()(persist((set, get) => ({
   },
 
   playSong: (dataPlay: DataPlay) => {
-    const { stopSong, currentSong } = get()
+    const { stopSong, nextSong, currentSong } = get()
     const { song, duration, type, index } = dataPlay
-    console.log(duration);
 
     // Para evitar que se repita el audio
     if(currentSong) stopSong()
     
     const audio = new Audio(song)
+    audio.controls = true
     audio.play()
+
+    // Al terminar la canción se pasa a la siguiente
+    audio.onended = () => {
+      nextSong()
+    }
 
     switch (type) { 
       case 'Podcast':
         const { podcast } = get()
-        console.log(podcast);
         
         const newSongInProgress = {
           id: podcast.episodes[index].id,
           preview: podcast.image,
           name: podcast.episodes[index].name,
           artist: 'podcast.episodes[index].',
-          duration: duration
+          duration: duration,
+          song: song
         }
-        console.log(newSongInProgress);
 
         set({ songInProgress: newSongInProgress})
       break;
@@ -342,7 +347,6 @@ export const useSongsStore = create<State>()(persist((set, get) => ({
       case 'Podcast':
         const { podcast } = get()
         const episode = podcast.episodes[newCurrentIndex]
-        console.log(episode);
         
         if(!episode) return false
 

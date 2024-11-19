@@ -1,4 +1,6 @@
-import { type PodcastDetail as TypePodcastDetail } from "../../types"
+import { type PodcastDetail as TypePodcastDetail, type Episode as EpisodeType } from "../../types"
+import { useState } from "react";
+import { useSongsStore } from "../../../store/songs";
 import { Episode } from "../Episode";
 
 interface Props {
@@ -6,6 +8,32 @@ interface Props {
 }
 
 export const PodcastDetail = ({ podcast }: Props) => {
+  const currentSong = useSongsStore(state => state.currentSong)
+  const playSong = useSongsStore(state => state.playSong)
+  const stopSong = useSongsStore(state => state.stopSong)
+  const [ isPlaying, setIsPlaying ] = useState(false)
+  
+  
+  const handelClickPlay = (EpisodeData: EpisodeType, index: number) => {
+    const EpisodeDataPreview = EpisodeData.preview
+    const EpisodeDuration  = parseInt(EpisodeData.duration)
+    
+    setIsPlaying(false)
+
+    // Valida si el audio actual es el que se quiere reproducir de ser asi se detiene
+    if(EpisodeDataPreview === currentSong.src && isPlaying)
+      stopSong()
+    else{
+      const dataPlay = {
+        'song': EpisodeDataPreview,
+        'duration': EpisodeDuration,
+        'type': 'Podcast',
+        index
+      }
+      playSong(dataPlay)
+      setIsPlaying(true)
+    }
+  }
     
   return (
     <>
@@ -23,7 +51,14 @@ export const PodcastDetail = ({ podcast }: Props) => {
 
       <div className="containerListEpisodes list">
         {(podcast.episodes).map((episode, index) => {
-          return <Episode EpisodeData={episode} namePodcast={podcast.name} key={episode.id} index={index} />
+          return <Episode 
+            EpisodeData={episode} 
+            namePodcast={podcast.name} 
+            key={episode.id} 
+            index={index} 
+            isPlaying={isPlaying}
+            clickPlay = {handelClickPlay}
+          />
         })}
       </div>
     </>
