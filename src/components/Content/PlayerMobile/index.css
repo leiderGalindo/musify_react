@@ -1,0 +1,83 @@
+.mainContainerPlayerMobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .content {
+    margin-bottom: 118px;
+  }
+
+  .mainContainerPlayerMobile
+  {
+    width: 100%;
+    height: 110px;
+    display: block;
+    padding-bottom: 10px;
+  }
+
+  .mainContainerPlayerMobile .containerPlayerMobile{
+    width: 100%;
+    height: 100%;
+    background: #333;
+    border-radius: 20px;
+    border-radius: 20px;
+    display: grid;
+    grid-template-columns: 80px calc(100% - 80px);
+  }
+
+  .containerPlayerMobile .containerPlayer {
+    max-width: 100%;
+    border-radius: 0;
+    flex-direction: row;
+    background: transparent;
+    align-items: center;
+    height: 80%;
+  }
+
+  .containerPlayerMobile .containerPreview { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .containerPlayerMobile .preview {
+    width: 70px;
+    height: 70px;
+    padding: 0;
+    margin: 0;
+    border-radius: 10px;
+    background-size: contain;
+    background-position: center;
+  }
+
+  .containerPlayerMobile .nameSong {
+    display: -webkit-inline-box;
+    line-clamp: 2;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .containerPlayerMobile .controlsAndName {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .containerPlayerMobile .controlsAndName > div {
+    width: 100%;
+  }
+  .containerPlayerMobile .noMobile {
+    display: none;
+  }
+
+  .containerPlayerMobile input {
+    width: 90%;
+  }
+  .containerPlayerMobile button {
+    background-color: transparent;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+}

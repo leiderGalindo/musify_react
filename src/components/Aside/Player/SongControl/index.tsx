@@ -75,12 +75,12 @@ export const SongControl = ({ songInProgress }: Props) => {
                 // onChange={handleChangeCurrentTime}
                 disabled
             />
-            <div className="d-flex justify-content-between">
+            <div className="d-flex justify-content-between noMobile">
                 <span>{formatTime(currentTime)}</span>
                 <span>{formatTime(end)}</span>
             </div>
             <div className="controls">
-                <button className="secondaryButtons">
+                <button className="secondaryButtons noMobile">
                     <ArrowsShuffle />
                 </button>
                 <button className="mainButtons" onClick={() => previousSong()}>
@@ -96,7 +96,7 @@ export const SongControl = ({ songInProgress }: Props) => {
                 <button className="mainButtons" onClick={() => nextSong()}>
                     <PlayerSkipForward />
                 </button>
-                <button className="secondaryButtons">
+                <button className="secondaryButtons noMobile">
                     <ArrowsShuffle />
                 </button>
             </div>
