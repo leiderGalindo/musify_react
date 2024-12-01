@@ -8,8 +8,6 @@ import { Artist } from "../../page/artist"
 import { Albums } from "../../page/albums"
 import { Album } from "../../page/album"
 import { Podcast } from "../../page/Podcast"
-import './index.css'
-import { PlayerMobile } from "./PlayerMobile"
 
 export const Content = () => {
     
@@ -30,9 +28,6 @@ export const Content = () => {
 					<Route>404: No such page!</Route>
 				</Switch>
 			</section>
-
-			{/* player mobile */}
-			<PlayerMobile />
 		</div>
 	)
 }

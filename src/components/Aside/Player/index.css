@@ -66,3 +66,32 @@
 .containerPlayer .player .sliderSong {
     width: 100%;
 }
+
+@media (max-width: 768px) {
+    
+    .containerPlayer .noMobile {
+        display: none;
+    }
+
+    .containerPlayer {
+        display: grid;
+        grid-template-columns: 4fr 8fr;
+        gap: 10px;
+        width: 100%;
+        height: 100%;
+        background: none;
+        padding: 0;
+        max-width: calc(100% - 10px);
+    }
+    
+    .containerPlayer .containerPreview { 
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 18px;
+    }
+}

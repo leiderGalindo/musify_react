@@ -28,3 +28,9 @@
 .btnUpgratedToPremium svg {
     fill: #efb810;
 }
+
+@media (max-width: 768px) {
+    .SectionTopBarAside {
+        display: none;
+    }
+}

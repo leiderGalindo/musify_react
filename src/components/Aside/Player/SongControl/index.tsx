@@ -22,7 +22,7 @@ export const SongControl = ({ songInProgress }: Props) => {
     const [ currentTime, setCurrentTime ] = useState(0)
     const duration = (songInProgress.duration ?? 0)
     const [ end, setEnd ] = useState(duration)
-
+    
     // Formatear milisegundos a minutos y segundos (801201 = 13 min 21 segundos) 
     const formatTime = (time: number): string => {
         const totalSeconds = Math.floor(time / 1000);        
@@ -63,16 +63,17 @@ export const SongControl = ({ songInProgress }: Props) => {
         setEnd(newEnd)
     }
 
+    console.log(currentTime);
+
     return (
         <div>
             <input 
                 type="range" 
-                id="songRangeInput"
+                id={`songRangeInput`}
                 min='0'
                 max={end}
                 className="sliderSong" 
                 value={currentTime}
-                // onChange={handleChangeCurrentTime}
                 disabled
             />
             <div className="d-flex justify-content-between noMobile">

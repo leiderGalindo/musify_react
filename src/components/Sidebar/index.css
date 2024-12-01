@@ -90,10 +90,6 @@
     transition: opacity 0.5s linear, transform 0.5s ease;
   }
 
-  .MainContainerApp .aside {
-    display: none;
-  }
-  
   .MainContainerApp .sidebar {
     width: 50%;
     box-shadow: 0 0 4px rgba(255, 255, 255, .4);

@@ -110,4 +110,7 @@
     justify-content: flex-start !important;
     padding: 15px;
   }
+  .basicEpisodeInformation {
+    padding: 0;
+  }
 }

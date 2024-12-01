@@ -9,3 +9,18 @@
     justify-content: center;
     padding-bottom: 52px;
 }
+
+@media (max-width: 768px) {
+    .aside {
+        width: 90%;
+        height: 110px;
+        position: absolute;
+        bottom: 0;
+        padding: 0;
+        background: #333;
+        border-radius: 20px;
+        margin-bottom: 10px;
+        grid-template-rows: 12fr;
+        padding-right: 10px;
+    }
+}

@@ -17,20 +17,22 @@ export const Player = () => {
       <div className="containerPreview" style={{ backgroundImage: `url(${SongPreview})` }}>
         {/* <img src={SongPreview} alt="song preview" /> */}
       </div>
-      <div className="songInformation">
-        <div>
-          <strong className="nameSong" title={songInProgress.name}>
-            {songInProgress.name ?? "Stuck space"}
-          </strong>
+      <div>
+        <div className="songInformation">
+          <div>
+            <strong className="nameSong" title={songInProgress.name}>
+              {songInProgress.name ?? "Stuck space"}
+            </strong>
+          </div>
+          <div>
+            <span className="nameArtistSong">
+              {songInProgress.artist ?? "Sharrak"}
+            </span>
+          </div>
         </div>
-        <div>
-          <span className="nameArtistSong">
-            {songInProgress.artist ?? "Sharrak"}
-          </span>
+        <div className="player">
+          <SongControl songInProgress={songInProgress} />
         </div>
-      </div>
-      <div className="player">
-        <SongControl songInProgress={songInProgress} />
       </div>
     </section>
   );
