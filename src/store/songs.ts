@@ -70,7 +70,7 @@ interface State {
   currentIndex: number
   currentType: string
   isPlaying: boolean
-  statusMenu: string
+  // statusMenu: string
   token: string
   listingStyle: string
   tokenExpiresIn: number
@@ -83,7 +83,7 @@ interface State {
   fetchPodcasts: () => void
   fetchPodcast: (Id: string) => void
   selectSong: (songId: string) => void
-  ChangeMenuStatus: () => void
+  // ChangeMenuStatus: () => void
   ChangeListingStyle: () => void
   playSong: (dataPlay: DataPlay) => void
   stopSong: () => void
@@ -104,7 +104,7 @@ export const useSongsStore = create<State>()(persist((set, get) => ({
   currentIndex: 0,
   currentType: '',
   isPlaying: false,
-  statusMenu: '',
+  // statusMenu: '',
   token: '',
   listingStyle: 'grid',
   tokenExpiresIn: 0,
@@ -390,12 +390,12 @@ export const useSongsStore = create<State>()(persist((set, get) => ({
     if(newCurrentSong.song ?? false) playSong(newCurrentSong)
   },
 
-  ChangeMenuStatus: () => {
-    const { statusMenu } = get()      
-    const NewMenuStatus = ((statusMenu === 'menuActive') ? '' : 'menuActive')
+  // ChangeMenuStatus: () => {
+  //   const { statusMenu } = get()      
+  //   const NewMenuStatus = ((statusMenu === 'menuActive') ? '' : 'menuActive')
 
-    set({ statusMenu: NewMenuStatus })
-  },
+  //   set({ statusMenu: NewMenuStatus })
+  // },
 
   ChangeListingStyle: () => {
     const { listingStyle } = get()

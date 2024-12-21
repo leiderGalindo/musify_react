@@ -6,6 +6,9 @@ interface Props {
 }
 
 export const Song = ({ song }: Props) => {
+    const songId = song.id ?? "0" 
+    console.log(songId);
+    
     return (
         <article className='itemSong'>
             <div className="containerImg">

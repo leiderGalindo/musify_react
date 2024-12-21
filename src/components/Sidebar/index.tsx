@@ -1,20 +1,23 @@
 import { useEffect } from "react"
 import { useLocation } from "wouter"
-import { useSongsStore } from '../../store/songs'
 import { Sections, SectionsMyLibrary } from "../Sections"
 import { Close } from "../../icons"
 import { ItemMenu } from "../ItemMenu"
 import { User } from "../user"
 import './index.css'
 
-export const Sidebar = () => {
+interface props {
+    changeMenu: () => void
+    statusMenu: string
+}
+
+export const Sidebar = ({changeMenu, statusMenu}: props) => {
     const [ location ] = useLocation()
-    const statusMenu = useSongsStore(state => state.statusMenu)
-    const ChangeMenuStatus = useSongsStore(state => state.ChangeMenuStatus)
 
     // Al cambiar de ubicacion oculta el menu
     useEffect(() => {
-        ChangeMenuStatus()
+        if(statusMenu === 'menuActive')
+            changeMenu()
     }, [location])
 
     return (
@@ -61,7 +64,7 @@ export const Sidebar = () => {
                     </div>
                 </div>
 
-                <button className="MenuClose" onClick={() => ChangeMenuStatus()}>
+                <button className="MenuClose" onClick={changeMenu}>
                     <Close />
                 </button>
             </div>

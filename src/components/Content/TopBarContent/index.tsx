@@ -5,9 +5,14 @@ import { ChevronLeft, ChevronRight, IconSearch, Menu } from "../../../icons";
 import { useSongsStore } from "../../../store/songs";
 import "./index.css";
 
-export const TopBarContect = () => {
-    const statusMenu = useSongsStore(state => state.statusMenu)
-    const ChangeMenuStatus = useSongsStore(state => state.ChangeMenuStatus)
+interface props {
+	changeMenu: () => void
+	statusMenu: string
+}
+
+export const TopBarContect = ({ changeMenu, statusMenu }: props) => {
+    // const statusMenu = useSongsStore(state => state.statusMenu)
+    // const changeMenu = useSongsStore(state => state.changeMenu)
     const fetchSongs    = useSongsStore(state => state.fetchSongs)
     const [ searchTerm, setSearchTerm ] = useState('')
     const [ location, setLocation  ] = useLocation()
@@ -41,7 +46,7 @@ export const TopBarContect = () => {
     
     return (
         <section className="containerTopBarContet">
-            <button className={`MenuOpen ${statusMenu}`} onClick={() => ChangeMenuStatus()}>
+            <button className={`MenuOpen ${statusMenu}`} onClick={changeMenu}>
                 <Menu />
             </button>
             

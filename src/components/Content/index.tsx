@@ -9,11 +9,16 @@ import { Albums } from "../../page/albums"
 import { Album } from "../../page/album"
 import { Podcast } from "../../page/Podcast"
 
-export const Content = () => {
+interface props {
+	changeMenu: () => void
+	statusMenu: string
+}
+
+export const Content = ({changeMenu, statusMenu}: props) => {
     
 	return(
 		<div className="content">
-			<TopBarContect />
+			<TopBarContect changeMenu={changeMenu} statusMenu={statusMenu} />
 			<section className="mainContent">
 				<Switch>
 					<Route path="/" component={Home} />
